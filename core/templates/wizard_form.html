@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+
+
+{% block content %}
+<style>
+    /*title field css*/
+    #id_0-title {
+        width: 100%;
+    }
+</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="" method="post">{% csrf_token %}
+
+                        {{ wizard.management_form }}
+                        {% if wizard.form.forms %}
+                        {{ wizard.form.management_form }}
+                        {% for form in wizard.form.forms %}
+                        {{ form|crispy }}
+                        {% endfor %}
+                        {% else %}
+                        <!-- perosnal details form -->
+
+
+                        <!-- field title  -->
+                        {% if wizard.form.title %}
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3 mb-0">
+                                <label class="btn btn-primary" for="">Job title</label>
+                            </div>
+                            <div class="form-group col-md-9 mb-0">
+                                {{wizard.form.title|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        {% endif %}
+                        <!-- field title end -->
+
+
+
+                        <!-- field company  -->
+                        {% if wizard.form.company %}
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3 mb-0">
+                                <label class="btn btn-primary" for="">Comnpany Name</label>
+                            </div>
+                            <div class="form-group col-md-9 mb-0">
+                                {{wizard.form.company|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        {% endif %}
+                        <!-- field company end -->
+
+
+                        <!-- field description  -->
+                        {% if wizard.form.description %}
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3 mb-0">
+                                <label class="btn btn-primary" for="">Job Description</label>
+                            </div>
+                            <div class="form-group col-md-9 mb-0">
+                                {{wizard.form.description|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        {% endif %}
+                        <!-- field description end -->
+
+
+                        <!-- field location  -->
+                        {% if wizard.form.location %}
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3 mb-0">
+                                <label class="btn btn-primary" for="">Company Location </label>
+                            </div>
+                            <div class="form-group col-md-9 mb-0">
+                                {{wizard.form.location|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        {% endif %}
+                        <!-- field location end -->
+
+
+                        <!-- field start_date  -->
+                        {% if wizard.form.start_date %}
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3 mb-0">
+                                <label class="btn btn-primary" for="">Start Date </label>
+                            </div>
+                            <div class="form-group col-md-9 mb-0">
+                                {{wizard.form.start_date|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        {% endif %}
+                        <!-- field start_date end -->
+
+
+                        <!-- field end_date  -->
+                        {% if wizard.form.end_date %}
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3 mb-0">
+                                <label class="btn btn-primary" for="">End Date </label>
+                            </div>
+                            <div class="form-group col-md-9 mb-0">
+                                {{wizard.form.end_date|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        {% endif %}
+                        <!-- field end_date end -->
+
+                        {% endif %}
+
+                        {% if wizard.steps.prev %}
+                        <button name="wizard_goto_step" type="submit"
+                            value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
+                        <button name="wizard_goto_step" type="submit"
+                            value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+                        {% endif %}
+                        <input type="submit" value="{% trans "submit" %}" />
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3"></div>
+
+    </div>
+</div>
+
+{% endblock %}
